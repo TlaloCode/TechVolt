@@ -1,0 +1,23 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+IPYTHONDIR=/app/.ipython
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+CACHEOPS_REDIS=redis://redis:6379/3
+
+# Celery
+# ------------------------------------------------------------------------------
+
+# Flower
+CELERY_FLOWER_USER=UtkSYbcOiOrXMcpENteLIjHJURaLuOTt
+CELERY_FLOWER_PASSWORD=tVaYWAqA06i6VdM7nyRs9y5jr2T9GXSYxTj0K29b9uS4SGNKgdTsjqMAEQFcp1x8
+
+CELERY_BROKER_URL=REDIS_URL
+
+DJANGO_EMAIL_HOST_USER=prueba@gmail.com
+EMAIL_REPLY_TO=noreply@fygtraining.com
+
+ADMIN_NAME="Frameware Factory"
+ADMIN_EMAIL=software-qa@framewarefactory.com

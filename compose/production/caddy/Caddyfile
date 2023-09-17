@@ -1,0 +1,25 @@
+{
+  email  contacto@trainingfyg.com
+  on_demand_tls {
+      interval 10m
+      burst 10
+  }
+}
+
+https:// {
+
+  tls {
+      on_demand
+  }
+
+  reverse_proxy nuxttraining:80
+}
+
+flower-backend.fygproducts.com {
+    reverse_proxy flower:5555
+
+}
+
+training-backend.fygproducts.com {
+    reverse_proxy django:5000
+}

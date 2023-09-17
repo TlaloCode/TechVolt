@@ -1,0 +1,41 @@
+{% load static %}
+{% block content %}
+  <div>
+    <div>
+    <p1 style="display: inline;font-size: 0.5cm;"><strong>¡Hola</strong></p1> <strong>{{user.name}}</strong><p2 style="display: inline;font-size: 0.5cm;"><strong>!</strong></p2>
+    </div>
+
+    <br>
+    <p> ¿Querías restablecer tu contraseña?
+    </p>
+    <p>
+      Alguien (esperamos que hayas sido tú) nos pidió que restableciéramos la contraseña para tu cuenta de <strong>{{ shop_name }}</strong>
+      en <strong>Training</strong>.
+    </p>
+    <br>
+    <p>
+    Haz clic en el siguiente botón para restablecer tu contraseña.</p>
+
+    <p>  Si no solicitaste restablecer tu contraseña, ignora este correo electrónico.
+
+    <div style="margin-top: 40px; margin-bottom: 40px;">
+        <a  class="buttonMail" style="padding: 15px; font-size: large; border: 0; border-radius: 6px; cursor: pointer; position: relative;
+            overflow: hidden; color: #fff; box-sizing: border-box; background: transparent; background-color: #2072B9; text-decoration: auto;"
+            href="{{ full_path_domain }}?token={{ verification_token }}">
+                Restablecer contraseña
+        </a>
+
+        <p>
+            <br> Puedes copiar y pegar el siguiente enlace en el explorador en caso <br /> de que el botón no funcione.
+        </p>
+
+        <p style="line-break: anywhere; font-size: x-small; color: rgb(49, 98, 153); margin-left: 50px; margin-right: 50px;">
+        <br> <strong>{{ full_path_domain }}?token={{ verification_token }}</strong>
+        </p>
+
+    </div>
+
+    </p>
+
+  </div>
+  {% endblock %}

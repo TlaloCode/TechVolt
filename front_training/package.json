@@ -1,0 +1,85 @@
+{
+    "name": "fyg-training",
+    "version": "1.0.0",
+    "author": {
+        "name": "Frameware Factory"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/salvia-kit/dashboard-v8-nuxt.git"
+    },
+    "engines": {
+        "npm": "please-use-yarn",
+        "yarn": ">= 1.19.1"
+    },
+    "keywords": [
+        "ui",
+        "vue",
+        "components",
+        "dashboard",
+        "admin",
+        "tailwindcss",
+        "nuxt",
+        "Nuxt.js",
+        "layout"
+    ],
+    "scripts": {
+        "dev": "nuxt",
+        "build": "nuxt build",
+        "start": "nuxt start",
+        "generate": "nuxt generate",
+        "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
+        "lint:prettier": "prettier --check .",
+        "lint": "yarn lint:js && yarn lint:prettier ",
+        "lint:js:fix": "yarn lint:js --fix",
+        "lint:prettier:fix": "prettier --write --list-different .",
+        "lintfix": "yarn lint:prettier:fix && yarn lint:js:fix",
+        "test": "jest"
+    },
+    "pre-commit": "lint-staged",
+    "lint-staged": {
+        "*.{js,vue}": "eslint"
+    },
+    "dependencies": {
+        "@blowstack/ckeditor-nuxt": "^0.6.0",
+        "@blowstack/ckeditor5-full-free-build": "^27.0.1",
+        "@idist/ckeditor-nuxt": "^1.0.1",
+        "@nuxtjs/axios": "^5.13.6",
+        "boxicons": "^2.1.4",
+        "core-js": "^3.24.1",
+        "jwt-decode": "3.1.2",
+        "nuxt": "^2.15.8",
+        "v-calendar": "^2.4.1",
+        "vee-validate": "^3.4.14",
+        "vue-cookie-law": "1.13.3",
+        "vue-good-table": "^2.21.11",
+        "vuesax": "^4.0.1-alpha.25",
+        "vuex-persist": "3.1.3"
+    },
+    "devDependencies": {
+        "@babel/eslint-parser": "^7.18.9",
+        "@nuxt/types": "~2.15.0",
+        "@nuxtjs/eslint-config": "^8.0.0",
+        "@nuxtjs/eslint-module": "^3.0.2",
+        "@nuxtjs/tailwindcss": "^5.3.2",
+        "@vue/test-utils": "^1.3.0",
+        "babel-core": "^7.0.0-bridge.0",
+        "babel-jest": "^28.1.3",
+        "eslint": "^8.22.0",
+        "eslint-config-prettier": "^8",
+        "eslint-plugin-nuxt": "^3.1.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-vue": "^9.5.1",
+        "jest": "^28.1.3",
+        "jest-environment-jsdom": "^28.1.3",
+        "lint-staged": "^13.0.3",
+        "postcss": "^8.4.16",
+        "pre-commit": "^1.2.2",
+        "prettier": "^2.5.1",
+        "sass": "^1.54.4",
+        "sass-loader": "^10",
+        "supertest": "^6.2.4",
+        "vue-jest": "^3.0.7"
+    }
+}

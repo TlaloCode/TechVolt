@@ -1,0 +1,24 @@
+{% load static %}
+{% block content %}
+<p style="font-size: 0.5cm;"><strong>¡Bienvenido, activa tu cuenta!</strong></p>
+
+<p><br>Estás a un paso de poder acceder a <strong>Training FyG</strong>.</p> <br>
+<div> <br>
+  Para activar tu cuenta, haz clic en el siguiente botón:
+  <div style="margin-top: 40px; margin-bottom: 40px;">
+    <a class="buttonMail" style="padding: 15px; font-size: large; border: 0; border-radius: 6px; cursor: pointer; position: relative;
+              overflow: hidden; color: #fff; box-sizing: border-box; background-color: #2072B9; text-decoration: auto;"
+      href="{{ full_path_domain }}?token={{ verification_token }}">
+      Activar mi cuenta</a>
+  </div>
+
+  <p>
+    <br> Puedes copiar y pegar el siguiente enlace en el explorador en caso <br /> de que el botón no te funcione.
+  </p>
+  <div
+    style="text-align:center;line-break: anywhere;font-size: x-small;color: rgb(49, 98, 153);margin-left: 50px;margin-right: 50px;">
+    <p>
+      <span> <br> {{ full_path_domain }}?token={{ verification_token }} </span>
+    </p>
+  </div>
+  {% endblock %}

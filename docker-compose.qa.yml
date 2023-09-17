@@ -1,0 +1,175 @@
+version: '3.7'
+
+volumes:
+  qa_postgres_data: {}
+  qa_postgres_data_backups: {}
+  qa_caddy_data: {}
+
+networks:
+  training_network_qa:
+    name: training_network_qa
+    driver: bridge
+    ipam:
+      driver: default
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: training_fyg_qa_django
+    container_name: training_fyg_qa_django
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.qa/.django
+      - ./.envs/.qa/.postgres
+    command: /start
+    # logging:
+    #   driver: awslogs
+    #   options:
+    #     awslogs-group: Training-QA
+    #     awslogs-stream: django
+    networks:
+      training_network_qa:
+        aliases:
+          - django
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/qa/postgres/Dockerfile
+    image: training_fyg_qa_postgres
+    container_name: training_fyg_qa_postgres
+    volumes:
+      - qa_postgres_data:/var/lib/postgresql/data:Z
+      - qa_postgres_data_backups:/backups/qa:z
+    env_file:
+      - ./.envs/.qa/.postgres
+    # logging:
+    #   driver: awslogs
+    #   options:
+    #     awslogs-group: Training-QA
+    #     awslogs-stream: postgres
+    networks:
+      training_network_qa:
+        aliases:
+          - postgres
+
+  caddy:
+    container_name: training_fyg_qa_caddy
+    image: caddy:2.3.0-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - django
+    volumes:
+      - qa_caddy_data:/data
+      - ./compose/qa/caddy/Caddyfile:/etc/caddy/Caddyfile
+    # logging:
+    #   driver: awslogs
+    #   options:
+    #     awslogs-group: Training-QA
+    #     awslogs-stream: caddy
+    networks:
+      training_network_qa:
+        aliases:
+          - caddy
+
+  redis:
+    image: redis:5
+    container_name: training_fyg_redis
+    # logging:
+    #   driver: awslogs
+    #   options:
+    #     awslogs-group: Training-QA
+    #     awslogs-stream: redis
+    networks:
+      training_network_qa:
+        aliases:
+          - redis
+
+  celeryworker:
+    <<: *django
+    image: training_fyg_qa_celeryworker
+    container_name: training_fyg_qa_celeryworker
+    command: /start-celeryworker
+    # logging:
+    #   driver: awslogs
+    #   options:
+    #     awslogs-group: Training-QA
+    #     awslogs-stream: celeryworker
+    networks:
+      training_network_qa:
+        aliases:
+          - celeryworker
+
+  celerybeat:
+    <<: *django
+    image: training_fyg_qa_celerybeat
+    container_name: training_fyg_qa_celerybeat
+    command: /start-celerybeat
+    # logging:
+    #   driver: awslogs
+    #   options:
+    #     awslogs-group: Training-QA
+    #     awslogs-stream: celerybeat
+    networks:
+      training_network_qa:
+        aliases:
+          - celerybeat
+
+  flower:
+    <<: *django
+    image: training_fyg_qa_flower
+    container_name: training_fyg_qa_flower
+    command: /start-flower
+    # logging:
+    #   driver: awslogs
+    #   options:
+    #     awslogs-group: Training-QA
+    #     awslogs-stream: flower
+    networks:
+      training_network_qa:
+        aliases:
+          - flower
+
+  # nuxttraining:
+  #   build:
+  #     context: .
+  #     dockerfile: ./compose/production/node/shop/Dockerfile
+  #   image: training_fyg_qa_nuxttraining
+  #   container_name: training_fyg_qa_nuxttraining
+  #   depends_on:
+  #     - django
+  #   logging:
+  #     driver: awslogs
+  #     options:
+  #       awslogs-group: Training-QA
+  #       awslogs-stream: nuxttraining
+  #   networks:
+  #     training_network_qa:
+  #       aliases:
+  #         - nuxttraining
+
+  # awscli:
+  #   build:
+  #     context: .
+  #     dockerfile: ./compose/qa/aws/Dockerfile
+  #   image: training_fyg_qa_awscli
+  #   container_name: training_fyg_qa_awscli
+  #   env_file:
+  #     - ./.envs/.qa/.django
+  #   volumes:
+  #     - qa_postgres_data_backups:/backups/qa:z
+  #   logging:
+  #     driver: awslogs
+  #     options:
+  #       awslogs-group: Training-QA
+  #       awslogs-stream: awscli
+  #   networks:
+  #     training_network_qa:
+  #       aliases:
+  #         - awscli

@@ -1,0 +1,32 @@
+
+      {% load static %}
+      {% block content %}
+
+      <div>
+            <p style="font-size: 0.5cm;"><strong>¡Hola,te damos la bienvenida!</strong></p>
+         <div>
+            <br/>
+            <p>
+                Has recibido una invitación de <strong></strong> para acceder al sistema <strong>Training</strong>.
+            <br/>
+            <p>
+                Para empezar a usar <strong>Training</strong>, da click al siguiente botón para que te des de alta:
+                <div style="margin-top: 40px; margin-bottom: 40px;">
+                    <a  class="buttonMail" style="padding: 15px; font-size: large; border: 0; border-radius: 6px; cursor: pointer; position: relative;
+                        overflow: hidden; color: #fff; box-sizing: border-box; background: transparent; background-color: #2072B9; text-decoration: auto;"
+                        href="{{ full_path_domain }}?token={{ verification_token }}">
+                            Registrarme
+                    </a>
+
+            </p>
+
+         </div>
+            <p>
+              <br/> Puedes copiar y pegar el siguiente enlace en el explorador en caso <br /> de que el botón no funcione.
+            </p>
+
+            <p style="line-break: anywhere; font-size: x-small; color: rgb(49, 98, 153); margin-left: 50px; margin-right: 50px;">
+                <strong>{{ full_path_domain }}?token={{ verification_token }}</strong>
+            </p>
+    </div>
+     {% endblock %}

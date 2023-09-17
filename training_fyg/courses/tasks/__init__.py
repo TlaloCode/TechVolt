@@ -1,0 +1,1 @@
+from .course_tasks import send_email_message_training_sended

@@ -1,0 +1,33 @@
+{% load static %}
+{% block content %}
+
+<div>
+    <p style="font-size: 0.5cm;"><strong>¡Hola!</strong></p>
+    <div>
+        <br />
+        <p>
+            El usuario {{ username }} a enviado un comentario correspondiente al curso {{ name }}.
+            <br />
+        <p>
+        <div style="margin-top: 40px; margin-bottom: 40px;">
+            <a class="buttonMail"
+                style="padding: 15px; font-size: large; border: 0; border-radius: 6px; cursor: pointer; position: relative;
+                        overflow: hidden; color: #fff; box-sizing: border-box; background: transparent; background-color: #2072B9; text-decoration: auto;"
+                href="{{ full_path_domain }}">
+                Ingresa y ve el mensage en training!
+            </a>
+
+            </p>
+
+        </div>
+        <p>
+            <br /> Puedes copiar y pegar el siguiente enlace en el explorador en caso <br /> de que el boton no
+            funcione.
+        </p>
+
+        <p
+            style="line-break: anywhere; font-size: x-small; color: rgb(49, 98, 153); margin-left: 50px; margin-right: 50px;">
+            <strong>{{ full_path_domain }}</strong>
+        </p>
+    </div>
+    {% endblock %}
